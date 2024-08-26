@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page with Navbar and Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navbar styling */
+        nav {
+            background-color: #4CAF50;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+
+        .card h3 {
+            margin-top: 5px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="/create">Create Blog</a>
+       
+    </nav>
+
+    <div class="container">
+        <!-- Card 1 -->
+        <div class="card">
+            <h2>Card Title 1</h2>
+            <h3>Subtitle 1</h3>
+            <p>
+                This is the description for the first card. It provides some information about the content or feature highlighted by the card.
+            </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <h2>Card Title 2</h2>
+            <h3>Subtitle 2</h3>
+            <p>
+                This is the description for the second card. It provides some additional information and serves as an overview of the topic.
+            </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <h2>Card Title 3</h2>
+            <h3>Subtitle 3</h3>
+            <p>
+                This is the description for the third card. It gives insights and details about a specific subject matter.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
