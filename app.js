@@ -43,7 +43,12 @@ app.listen(port, () => {
 app.get('', (req, res) => {
     // console.log(req);
     // res.send('<h1>Hdddelldo Wodrld!</h1>');
-    res.render('blogs');
+
+    //using sequelize to fetch data from database
+    const blogs = db.blogs.findAll().then((blogs) => {
+        res.render('blogs', {blogs: blogs});
+    });
+   
     }
 );
 

@@ -73,32 +73,20 @@
     </nav>
 
     <div class="container">
-        <!-- Card 1 -->
-        <div class="card">
-            <h2>Card Title 1</h2>
-            <h3>Subtitle 1</h3>
-            <p>
-                This is the description for the first card. It provides some information about the content or feature highlighted by the card.
-            </p>
-        </div>
+        <!-- Card -->
 
-        <!-- Card 2 -->
-        <div class="card">
-            <h2>Card Title 2</h2>
-            <h3>Subtitle 2</h3>
-            <p>
-                This is the description for the second card. It provides some additional information and serves as an overview of the topic.
-            </p>
-        </div>
+      
+        <% blogs.length != 0 && blogs.forEach((blog) => { %>
+            <div class="card">
+                <h2><%= blog.title %></h2>
+                <h3><%= blog.author %></h3>
+                <p><%= blog.body %></p>
+                <a href="/blogs/<%= blog.id %>">Read more</a>
+            </div>
+        <% }) %>
 
-        <!-- Card 3 -->
-        <div class="card">
-            <h2>Card Title 3</h2>
-            <h3>Subtitle 3</h3>
-            <p>
-                This is the description for the third card. It gives insights and details about a specific subject matter.
-            </p>
-        </div>
+
+     
     </div>
 
 </body>
