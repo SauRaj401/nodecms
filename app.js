@@ -7,6 +7,7 @@ const port = 3000;
 
 //database connection
 const db = require('./model/index');
+const { where } = require('sequelize');
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log("yes re-sync done");
 // });
@@ -40,17 +41,87 @@ app.listen(port, () => {
 //     }
 // );
 
-app.get('', (req, res) => {
+app.get('/', async (req, res) => {
     // console.log(req);
     // res.send('<h1>Hdddelldo Wodrld!</h1>');
 
     //using sequelize to fetch data from database
-    const blogs = db.blogs.findAll().then((blogs) => {
+   
+
+ await db.blogs.findAll().then((blogs) => {
         res.render('blogs', {blogs: blogs});
+    });
+
+   
+    }
+);
+
+//view single blog through id
+app.get('/blogs/:id', async (req, res) => {
+    // console.log(req);
+    // res.send('<h1>Hdddelldo Wodrld!</h1>');
+
+    //using sequelize to fetch data from database
+    const blog = await db.blogs.findByPk(req.params.id).then((blog) => {
+        res.render('blog', {blog: blog});
     });
    
     }
 );
+
+//metod to edit the blog
+app.get('/edit/:id', async (req, res) => {
+    
+ await db.blogs.findByPk(req.params.id).then((blog) => {
+        res.render('editBlog', {blog: blog});
+    });
+   
+    }
+);
+
+//method to delete the blog
+app.get('/delete/:id', async (req, res) => {
+   await db.blogs.destroy({
+        where   : {id: req.params.id}
+    });
+     res.redirect('/?nocache=' + new Date().getTime());
+
+    }
+);
+
+
+//method to edit the blog
+//edit blog
+app.get('/edit/:id', async (req, res) => {
+        
+        await db.blogs.findByPk(req.params.id).then((blog) => {
+            res.render('editBlog', {blog: blog});
+        });
+    
+        }
+    );  
+
+//editBlog function
+app.post("/editBlog/:id",async (req,res)=>{
+
+    const id = req.params.id;
+    const title = req.body.title;
+    const subTitle = req.body.subtitle;
+    const description = req.body.description;
+   
+    await db.blogs.update({
+        title : title,
+        subTitle : subTitle,
+        description : description
+    },{
+        where : {
+            id : id
+        }
+    });
+    res.redirect("/blog/" + id);
+});
+
+
 
 app.get('/create', (req, res) => {
     // console.log(req);

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Blog</h1>
+        <div class="card">
+            <h2>Blog Post Title: <%- blog.title %></h2>
+            <h3>Subtitle: <%- blog.subtitle %></h3>
+            
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus feugiat, varius libero ac, ultricies nisi. Nulla facilisi. Nullam nec purus feugiat, varius libero ac, ultricies nisi. Nulla facilisi. Nullam nec purus feugiat, varius libero ac, ultricies nisi. Nulla facilisi.</p>
+           
+            <button><a href="/edit/<%- blog.id %>">Edit</a></button>
+
+           
+            <!-- <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST"> -->
+                <button><a href="/delete/<%- blog.id %>">Delete</a></button>
+            <!-- </form> -->
+        
+        </div>
+    </div>
+</body>
+</html>
