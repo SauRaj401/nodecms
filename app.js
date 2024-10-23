@@ -106,19 +106,20 @@ app.post("/editBlog/:id",async (req,res)=>{
 
     const id = req.params.id;
     const title = req.body.title;
-    const subTitle = req.body.subtitle;
+    const subtitle = req.body.subtitle;
     const description = req.body.description;
    
     await db.blogs.update({
         title : title,
-        subTitle : subTitle,
+        subtitle : subtitle,
         description : description
     },{
         where : {
             id : id
         }
     });
-    res.redirect("/blog/" + id);
+    res.redirect('/');
+    // res.redirect('/?nocache=' + new Date().getTime());
 });
 
 
