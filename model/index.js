@@ -30,6 +30,7 @@ db.sequelize = sequelize;
 
 // REQUIRE ALL MODELS HERE
 db.blogs = require("./blogModel.js")(sequelize,DataTypes)
+db.users = require("./userModel.js")(sequelize,DataTypes)
 
 
 

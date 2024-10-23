@@ -1,5 +1,6 @@
 //server
 const { name } = require('ejs');
+
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -8,6 +9,8 @@ const port = 3000;
 //database connection
 const db = require('./model/index');
 const { where } = require('sequelize');
+const { renderCreateBlog, createBlog, getBlogById, getAllBlogs, editBlog, deleteBlog, getEditBlog } = require('./controllers/blog/blogController');
+const { register, renderRegister, renderLogin, login } = require('./controllers/auth/authController');
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log("yes re-sync done");
 // });
@@ -34,6 +37,18 @@ app.listen(port, () => {
     }
 );
 
+
+//import routes
+const blogRoute = require('./routes/blogRoute');
+const authRoute = require('./routes/auth/authRoute');
+//use routes
+app.use('', blogRoute);
+
+app.use('', authRoute);
+
+
+
+
 // app.get('/', (req, res) => {
 //     // console.log(req);
 //     // res.send('<h1>Hdddelldo Wodrld!</h1>');
@@ -41,117 +56,47 @@ app.listen(port, () => {
 //     }
 // );
 
-app.get('/', async (req, res) => {
-    // console.log(req);
-    // res.send('<h1>Hdddelldo Wodrld!</h1>');
-
-    //using sequelize to fetch data from database
-   
-
- await db.blogs.findAll().then((blogs) => {
-        res.render('blogs', {blogs: blogs});
-    });
-
-   
-    }
-);
+// app.get('/', getAllBlogs);
 
 //view single blog through id
-app.get('/blogs/:id', async (req, res) => {
-    // console.log(req);
-    // res.send('<h1>Hdddelldo Wodrld!</h1>');
-
-    //using sequelize to fetch data from database
-    const blog = await db.blogs.findByPk(req.params.id).then((blog) => {
-        res.render('blog', {blog: blog});
-    });
-   
-    }
-);
+// app.get('/blogs/:id', getBlogById);
 
 //metod to edit the blog
-app.get('/edit/:id', async (req, res) => {
-    
- await db.blogs.findByPk(req.params.id).then((blog) => {
-        res.render('editBlog', {blog: blog});
-    });
-   
-    }
-);
+// app.get('/editBlog/:id', getEditBlog);
 
 //method to delete the blog
-app.get('/delete/:id', async (req, res) => {
-   await db.blogs.destroy({
-        where   : {id: req.params.id}
-    });
-     res.redirect('/?nocache=' + new Date().getTime());
-
-    }
-);
+// app.get('/delete/:id', deleteBlog);
 
 
 //method to edit the blog
 //edit blog
-app.get('/edit/:id', async (req, res) => {
+// app.get('/edit/:id', async (req, res) => {
         
-        await db.blogs.findByPk(req.params.id).then((blog) => {
-            res.render('editBlog', {blog: blog});
-        });
+//         await db.blogs.findByPk(req.params.id).then((blog) => {
+//             res.render('editBlog', {blog: blog});
+//         });
     
-        }
-    );  
+//         }
+//     );  
 
 //editBlog function
-app.post("/editBlog/:id",async (req,res)=>{
-
-    const id = req.params.id;
-    const title = req.body.title;
-    const subtitle = req.body.subtitle;
-    const description = req.body.description;
-   
-    await db.blogs.update({
-        title : title,
-        subtitle : subtitle,
-        description : description
-    },{
-        where : {
-            id : id
-        }
-    });
-    res.redirect('/');
-    // res.redirect('/?nocache=' + new Date().getTime());
-});
+// app.post("/editBlog/:id",editBlog);
 
 
 
-app.get('/create', (req, res) => {
-    // console.log(req);
-    // res.send('<h1>Hdddelldo Wodrld!</h1>');
-    res.render('createBlog');
-    }
-);
 
-//createBlog function
-app.post('/createButton', async (req, res) => {
-    // console.log(req);
-    // res.send('<h1>Hdddelldo Wodrld!</h1>');
+//get register view 
+// app.get('/register', renderRegister);
 
-    //destructuring
-    console.log(req.body);
-    const {title, subtitle, description} = req.body;
-   await db.blogs.create({
-        title: title,
-        subtitle: subtitle,
-        description: description
-    });
-    res.redirect('/');
 
-    //using sequelize to insert to database
+// // Handle registration form submission
+// app.post('/register', register);
 
-    // console.log(req.body);
-    // res.send('createBlog');
-    }
-);
+// //get login view
+// app.get('/login', renderLogin);
+// // Handle login form submission
+// app.post('/login', login);
+
 
 //what is nodemon?
 //nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.

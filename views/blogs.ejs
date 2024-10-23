@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page with Navbar and Cards</title>
+    <title>Blog CMS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +17,17 @@
         nav {
             background-color: #4CAF50;
             padding: 10px 0;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .left-nav {
+            margin-left: 20px;
+        }
+
+        nav .right-nav {
+            margin-right: 20px;
         }
 
         nav a {
@@ -68,17 +78,20 @@
 
     <!-- Navbar -->
     <nav>
-        <a href="/create">Create Blog</a>
-       
+        <div class="left-nav">
+            <a href="/createBlog">Create Blog</a>
+        </div>
+        <div class="right-nav">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
     </nav>
 
     <div class="container">
         <!-- Card -->
 
-      
         <% if (blogs.length > 0) { %>
             <h1>All Blogs</h1>
-
         <% } else { %>
             <h1>No Blogs</h1>
         <% } %>
@@ -91,9 +104,6 @@
                 <a href="/blogs/<%= blog.id %>">Read more</a>
             </div>
         <% }) %>
-
-
-     
     </div>
 
 </body>
